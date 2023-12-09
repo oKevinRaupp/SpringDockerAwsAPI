@@ -34,4 +34,15 @@ public class PersonServices {
         person.setId(counter.incrementAndGet());
         return person;
     }
+    public Person create(Person person) {
+        logger.info("Creating one person!");
+        return person;
+    }
+    public Person update(Person person) {
+        logger.info("Updating one person!");
+        return person;
+    }
+    public void delete(String id) {
+        logger.info("Deleting one person!");
+    }
 }
