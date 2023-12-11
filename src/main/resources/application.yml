@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/rest_spring?useTimezone=true&serverTimezone=UTC
+    username: devkevin
+    password: Teste123@!
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
