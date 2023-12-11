@@ -1,28 +1,26 @@
-package com.kevinraupp.api.studydockeraws.entities;
+package com.kevinraupp.api.studydockeraws.data.vo.v1;
 
-import jakarta.persistence.*;
+
 
 import java.io.Serializable;
 import java.util.Objects;
-@Entity
-@Table(name = "persons")
-public class Person implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class PersonVO implements Serializable {
+
     private Long id;
-    @Column(name = "fist_name",nullable = false,length = 50)
+
     private String firstName;
-    @Column(name = "last_name",nullable = false,length = 50)
+
     private String lastName;
-    @Column(nullable = false,length = 50)
+
     private String address;
-    @Column(nullable = false,length = 1)
+
     private String gender;
 
-    public Person() {
+    public PersonVO() {
     }
 
-    public Person(String firstName, String lastName, String address, String gender) {
+    public PersonVO(String firstName, String lastName, String address, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -72,7 +70,7 @@ public class Person implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person person)) return false;
+        if (!(o instanceof PersonVO person)) return false;
         return Objects.equals(id, person.id);
     }
 
