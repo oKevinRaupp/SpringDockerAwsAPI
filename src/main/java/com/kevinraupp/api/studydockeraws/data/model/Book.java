@@ -18,7 +18,7 @@ public class Book {
     private Date launch_date;
     @Column(name = "price", nullable = false)
     private double price;
-    @Column(name = "title", nullable = false,length = 50)
+    @Column(name = "title", nullable = false, length = 50)
     private String title;
 
     public Book() {
