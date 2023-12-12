@@ -4,8 +4,8 @@ package com.kevinraupp.api.studydockeraws.controller;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
 import com.kevinraupp.api.studydockeraws.data.vo.v2.PersonVOV2;
 import com.kevinraupp.api.studydockeraws.services.PersonServices;
+import com.kevinraupp.api.studydockeraws.util.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,30 +16,30 @@ import java.util.List;
 public class PersonController {
     @Autowired
     private PersonServices services;
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
     public List<PersonVO> findAll(){
         return services.findAll();
     }
 
-    @GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
     public PersonVO findByID(@PathVariable(value = "id") Long id){
         return services.findById(id);
     }
 
-    @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML},
+            consumes = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
     public PersonVO create(@RequestBody PersonVO person){
         return services.create(person);
     }
 
-    @PostMapping(value = "/test/v2",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(value = "/test/v2",produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML},
+            consumes = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
     public PersonVOV2 createv2(@RequestBody PersonVOV2 person){
         return services.createV2(person);
     }
 
-    @PutMapping(produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    @PutMapping(produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML},
+            consumes = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
     public PersonVO update(@RequestBody PersonVO person){
         return services.update(person);
     }
