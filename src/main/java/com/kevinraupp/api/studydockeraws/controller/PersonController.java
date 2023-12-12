@@ -39,7 +39,7 @@ public class PersonController {
         return services.createV2(person);
     }
 
-    @PutMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML},
+    @PutMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,MediaType.APPLICATION_YML},
             consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
     public PersonVO update(@RequestBody PersonVO person) {
         return services.update(person);

@@ -1,5 +1,6 @@
 package com.kevinraupp.api.studydockeraws.services;
 
+import com.kevinraupp.api.studydockeraws.controller.PersonController;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
 import com.kevinraupp.api.studydockeraws.data.model.Person;
 import com.kevinraupp.api.studydockeraws.data.vo.v2.PersonVOV2;
@@ -8,6 +9,8 @@ import com.kevinraupp.api.studydockeraws.mapper.DozerMapper;
 import com.kevinraupp.api.studydockeraws.mapper.custom.PersonMapper;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +27,9 @@ public class PersonServices {
     public PersonVO findById(Long id) {
         logger.info("Finding one person!");
         var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify! "));
-        return DozerMapper.parseObject(entity, PersonVO.class);
+        PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findByID(id)).withSelfRel());
+        return vo;
     }
 
     public List<PersonVO> findAll() {
@@ -51,7 +56,7 @@ public class PersonServices {
     public PersonVO update(PersonVO person) {
         logger.info("Updating one person!");
 
-        var entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify!"));
+        var entity = repository.findById(person.getKey()).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify!"));
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setAddress(person.getAddress());

@@ -1,12 +1,15 @@
 package com.kevinraupp.api.studydockeraws.data.vo.v1;
 
 
+import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
-
-    private Long id;
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
+    @Mapping("id")
+    private Long key;
 
     private String firstName;
 
@@ -26,12 +29,12 @@ public class PersonVO implements Serializable {
         this.gender = gender;
     }
 
-    public Long getId() {
-        return id;
+    public Long getKey() {
+        return key;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(Long key) {
+        this.key = key;
     }
 
     public String getFirstName() {
@@ -70,11 +73,11 @@ public class PersonVO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PersonVO person)) return false;
-        return Objects.equals(id, person.id);
+        return Objects.equals(key, person.key);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(key);
     }
 }
