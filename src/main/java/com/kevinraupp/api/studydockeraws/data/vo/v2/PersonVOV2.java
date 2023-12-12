@@ -1,13 +1,20 @@
 package com.kevinraupp.api.studydockeraws.data.vo.v2;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.github.dozermapper.core.Mapping;
+import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-
-public class PersonVOV2 implements Serializable {
-
-    private Long id;
+@JsonPropertyOrder({"id","firstName","lastName","address","address","gender","birthday"})
+public class PersonVOV2 extends RepresentationModel<PersonVO> implements Serializable {
+    @Mapping("id")
+    @JsonProperty("id")
+    private Long key;
 
     private String firstName;
 
@@ -28,12 +35,12 @@ public class PersonVOV2 implements Serializable {
         this.gender = gender;
     }
 
-    public Long getId() {
-        return id;
+    public Long getKey() {
+        return key;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(Long key) {
+        this.key = key;
     }
 
     public String getFirstName() {
@@ -80,11 +87,11 @@ public class PersonVOV2 implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PersonVOV2 person)) return false;
-        return Objects.equals(id, person.id);
+        return Objects.equals(key, person.key);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(key);
     }
 }
