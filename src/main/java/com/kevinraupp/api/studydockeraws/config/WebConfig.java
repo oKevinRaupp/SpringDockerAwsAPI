@@ -24,8 +24,8 @@ public class WebConfig implements WebMvcConfigurer {
 
         //HEADER QUERY PARAM.
         configurer.favorParameter(false).ignoreAcceptHeader(false).useRegisteredExtensionsOnly(false).
-                defaultContentType(MediaType.APPLICATION_JSON).mediaType("json",MediaType.APPLICATION_JSON).
-                mediaType("xml",MediaType.APPLICATION_XML).mediaType("x-yaml",MEDIA_TYPE_APPLICATION_YML);
+                defaultContentType(MediaType.APPLICATION_JSON).mediaType("json", MediaType.APPLICATION_JSON).
+                mediaType("xml", MediaType.APPLICATION_XML).mediaType("x-yaml", MEDIA_TYPE_APPLICATION_YML);
 
         /*URL QUERY PARAM.
         configurer.favorParameter(true).parameterName("MediaType").ignoreAcceptHeader(true).useRegisteredExtensionsOnly(false).

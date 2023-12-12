@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
+
 @Service
 public class PersonServices {
     @Autowired
@@ -20,12 +21,13 @@ public class PersonServices {
     PersonMapper mapper;
     private Logger logger = Logger.getLogger(PersonServices.class.getName());
 
-    public PersonVO findById(Long id){
+    public PersonVO findById(Long id) {
         logger.info("Finding one person!");
         var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify! "));
         return DozerMapper.parseObject(entity, PersonVO.class);
     }
-    public List<PersonVO> findAll(){
+
+    public List<PersonVO> findAll() {
         logger.info("Finding all person!");
         return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
     }
@@ -37,6 +39,7 @@ public class PersonServices {
         var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
         return vo;
     }
+
     public PersonVOV2 createV2(PersonVOV2 person) {
         logger.info("[V2] Creating one person! [V2]");
 
@@ -44,6 +47,7 @@ public class PersonServices {
         var vo = mapper.convertEntityToVo(repository.save(entity));
         return vo;
     }
+
     public PersonVO update(PersonVO person) {
         logger.info("Updating one person!");
 
@@ -56,6 +60,7 @@ public class PersonServices {
         var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
         return vo;
     }
+
     public void delete(Long id) {
         logger.info("Deleting one person!");
         var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify!"));

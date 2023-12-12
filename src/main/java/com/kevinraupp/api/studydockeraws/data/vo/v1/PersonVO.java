@@ -1,7 +1,6 @@
 package com.kevinraupp.api.studydockeraws.data.vo.v1;
 
 
-
 import java.io.Serializable;
 import java.util.Objects;
 

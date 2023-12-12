@@ -16,35 +16,37 @@ import java.util.List;
 public class PersonController {
     @Autowired
     private PersonServices services;
-    @GetMapping(produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
-    public List<PersonVO> findAll(){
+
+    @GetMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public List<PersonVO> findAll() {
         return services.findAll();
     }
 
-    @GetMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
-    public PersonVO findByID(@PathVariable(value = "id") Long id){
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public PersonVO findByID(@PathVariable(value = "id") Long id) {
         return services.findById(id);
     }
 
-    @PostMapping(produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML},
-            consumes = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
-    public PersonVO create(@RequestBody PersonVO person){
+    @PostMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+            consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public PersonVO create(@RequestBody PersonVO person) {
         return services.create(person);
     }
 
-    @PostMapping(value = "/test/v2",produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML},
-            consumes = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
-    public PersonVOV2 createv2(@RequestBody PersonVOV2 person){
+    @PostMapping(value = "/test/v2", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML},
+            consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public PersonVOV2 createv2(@RequestBody PersonVOV2 person) {
         return services.createV2(person);
     }
 
-    @PutMapping(produces = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML},
-            consumes = {MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML,MediaType.APPLICATION_YML})
-    public PersonVO update(@RequestBody PersonVO person){
+    @PutMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML},
+            consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    public PersonVO update(@RequestBody PersonVO person) {
         return services.update(person);
     }
+
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
+    public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) {
         services.delete(id);
         return ResponseEntity.noContent().build();
     }
