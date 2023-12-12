@@ -60,8 +60,8 @@ public class PersonServices {
         }
         logger.info("[V2] Creating one person! [V2]");
 
-        var entity = mapper.convertVoToEntity(person);
-        var vo = mapper.convertEntityToVo(repository.save(entity));
+        var entity = mapper.convertVoToPerson(person);
+        var vo = mapper.convertPersonToVo(repository.save(entity));
         vo.add(linkTo(methodOn(PersonController.class).findByID(vo.getKey())).withSelfRel());
         return vo;
     }

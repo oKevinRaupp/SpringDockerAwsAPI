@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Service
 public class PersonMapper {
-    public PersonVOV2 convertEntityToVo(Person person) {
+    public PersonVOV2 convertPersonToVo(Person person) {
         PersonVOV2 vo = new PersonVOV2();
         vo.setKey(person.getId());
         vo.setFirstName(person.getFirstName());
@@ -19,7 +19,7 @@ public class PersonMapper {
         return vo;
     }
 
-    public Person convertVoToEntity(PersonVOV2 person) {
+    public Person convertVoToPerson(PersonVOV2 person) {
         Person entity = new Person();
         entity.setId(person.getKey());
         entity.setFirstName(person.getFirstName());
