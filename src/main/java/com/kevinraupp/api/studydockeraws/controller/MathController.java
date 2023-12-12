@@ -3,11 +3,15 @@ package com.kevinraupp.api.studydockeraws.controller;
 import com.kevinraupp.api.studydockeraws.converters.NumberConverter;
 import com.kevinraupp.api.studydockeraws.exceptions.UnsuportedMathOperationException;
 import com.kevinraupp.api.studydockeraws.math.SimpleMath;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/math")
+@RestController
+@RequestMapping(value = "/api/math/v1")
+@Tag(name = "Math",description = "Endpoint for simple math exercises.")
 public class MathController {
     private SimpleMath math = new SimpleMath();
 
