@@ -1,6 +1,7 @@
 package com.kevinraupp.api.studydockeraws.handler;
 
 import com.kevinraupp.api.studydockeraws.exceptions.ExceptionResponse;
+import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.exceptions.ResourceNotFoundException;
 import com.kevinraupp.api.studydockeraws.exceptions.UnsuportedMathOperationException;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class CustumizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(UnsuportedMathOperationException.class)
-    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
+    public final ResponseEntity<ExceptionResponse> handleUnsuportedMathOperationExceptions(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
@@ -34,4 +35,11 @@ public class CustumizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }

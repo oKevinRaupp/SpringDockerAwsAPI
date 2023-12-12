@@ -4,6 +4,7 @@ import com.kevinraupp.api.studydockeraws.controller.PersonController;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
 import com.kevinraupp.api.studydockeraws.data.model.Person;
 import com.kevinraupp.api.studydockeraws.data.vo.v2.PersonVOV2;
+import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.exceptions.ResourceNotFoundException;
 import com.kevinraupp.api.studydockeraws.mapper.DozerMapper;
 import com.kevinraupp.api.studydockeraws.mapper.custom.PersonMapper;
@@ -40,6 +41,10 @@ public class PersonServices {
     }
 
     public PersonVO create(PersonVO person) {
+        if(person == null) {
+            logger.info("Trying to create a null object!");
+            throw new RequiredObjectIsNullException();
+        }
         logger.info("Creating one person!");
 
         var entity = DozerMapper.parseObject(person, Person.class);
@@ -49,6 +54,10 @@ public class PersonServices {
     }
 
     public PersonVOV2 createV2(PersonVOV2 person) {
+        if(person == null){
+            logger.info("[V2] Trying to create a null object! [V2]");
+            throw new RequiredObjectIsNullException();
+        }
         logger.info("[V2] Creating one person! [V2]");
 
         var entity = mapper.convertVoToEntity(person);
@@ -58,6 +67,10 @@ public class PersonServices {
     }
 
     public PersonVO update(PersonVO person) {
+        if(person == null) {
+            logger.info("Trying to update a null object!");
+            throw new RequiredObjectIsNullException();
+        }
         logger.info("Updating one person!");
 
         var entity = repository.findById(person.getKey()).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify!"));
