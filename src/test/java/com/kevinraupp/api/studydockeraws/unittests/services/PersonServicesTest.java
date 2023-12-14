@@ -1,11 +1,11 @@
-package com.kevinraupp.api.studydockeraws.unittests.mockito;
+package com.kevinraupp.api.studydockeraws.unittests.services;
 
 import com.kevinraupp.api.studydockeraws.data.model.Person;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;
 import com.kevinraupp.api.studydockeraws.services.PersonServices;
-import com.kevinraupp.api.studydockeraws.unittests.MockPerson;
+import com.kevinraupp.api.studydockeraws.unittests.mocks.MockPerson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

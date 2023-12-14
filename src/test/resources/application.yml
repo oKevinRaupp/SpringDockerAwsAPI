@@ -1,0 +1,11 @@
+server:
+  port: 8888
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+springdoc:
+  pathsToMatch: /api/**/v1/**
+  swagger-ui:
+    use-root-path: true

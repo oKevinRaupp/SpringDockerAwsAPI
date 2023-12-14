@@ -1,11 +1,11 @@
-package com.kevinraupp.api.studydockeraws.unittests.mockito;
+package com.kevinraupp.api.studydockeraws.unittests.services;
 
 import com.kevinraupp.api.studydockeraws.data.model.Book;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.BookVO;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.repositories.BookRepository;
 import com.kevinraupp.api.studydockeraws.services.BookServices;
-import com.kevinraupp.api.studydockeraws.unittests.MockBook;
+import com.kevinraupp.api.studydockeraws.unittests.mocks.MockBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
