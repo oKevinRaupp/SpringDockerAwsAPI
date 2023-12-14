@@ -1,5 +1,7 @@
 server:
   port: 8888
+cors:
+  originPatterns: http://localhost:8080,https://kevinraupp.com,http://localhost:3000
 spring:
   jpa:
     open-in-view: false
