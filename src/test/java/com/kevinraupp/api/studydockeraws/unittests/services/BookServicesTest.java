@@ -1,6 +1,6 @@
 package com.kevinraupp.api.studydockeraws.unittests.services;
 
-import com.kevinraupp.api.studydockeraws.data.model.Book;
+import com.kevinraupp.api.studydockeraws.model.Book;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.BookVO;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.repositories.BookRepository;

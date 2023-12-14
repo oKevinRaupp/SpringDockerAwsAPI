@@ -1,4 +1,4 @@
-package com.kevinraupp.api.studydockeraws.data.model;
+package com.kevinraupp.api.studydockeraws.model;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "books")
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

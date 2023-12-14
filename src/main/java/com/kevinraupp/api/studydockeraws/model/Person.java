@@ -1,4 +1,4 @@
-package com.kevinraupp.api.studydockeraws.data.model;
+package com.kevinraupp.api.studydockeraws.model;
 
 import jakarta.persistence.*;
 

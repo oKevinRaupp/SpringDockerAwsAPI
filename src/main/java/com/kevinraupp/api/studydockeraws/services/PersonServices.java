@@ -2,20 +2,21 @@ package com.kevinraupp.api.studydockeraws.services;
 
 import com.kevinraupp.api.studydockeraws.controller.PersonController;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
-import com.kevinraupp.api.studydockeraws.data.model.Person;
 import com.kevinraupp.api.studydockeraws.data.vo.v2.PersonVOV2;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.exceptions.ResourceNotFoundException;
 import com.kevinraupp.api.studydockeraws.mapper.DozerMapper;
 import com.kevinraupp.api.studydockeraws.mapper.custom.PersonMapper;
+import com.kevinraupp.api.studydockeraws.model.Person;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonServices {
@@ -41,7 +42,7 @@ public class PersonServices {
     }
 
     public PersonVO create(PersonVO person) {
-        if(person == null) {
+        if (person == null) {
             logger.info("Trying to create a null object!");
             throw new RequiredObjectIsNullException();
         }
@@ -54,7 +55,7 @@ public class PersonServices {
     }
 
     public PersonVOV2 createV2(PersonVOV2 person) {
-        if(person == null){
+        if (person == null) {
             logger.info("[V2] Trying to create a null object! [V2]");
             throw new RequiredObjectIsNullException();
         }
@@ -67,7 +68,7 @@ public class PersonServices {
     }
 
     public PersonVO update(PersonVO person) {
-        if(person == null) {
+        if (person == null) {
             logger.info("Trying to update a null object!");
             throw new RequiredObjectIsNullException();
         }

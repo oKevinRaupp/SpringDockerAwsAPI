@@ -8,7 +8,8 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
-@JsonPropertyOrder({"id","firstName","lastName","address","address","gender"})
+
+@JsonPropertyOrder({"id", "firstName", "lastName", "address", "address", "gender"})
 public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
     @Mapping("id")
     @JsonProperty("id")

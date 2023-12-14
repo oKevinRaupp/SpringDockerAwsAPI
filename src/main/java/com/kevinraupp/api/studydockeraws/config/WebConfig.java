@@ -26,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         var allowedOrigins = corsOriginPatterns.split(",");
-        registry.addMapping("/**").allowedMethods("GET","POST").allowedOrigins(allowedOrigins).allowCredentials(true);
+        registry.addMapping("/**").allowedMethods("GET", "POST").allowedOrigins(allowedOrigins).allowCredentials(true);
     }
 
     @Override
@@ -34,6 +34,5 @@ public class WebConfig implements WebMvcConfigurer {
         configurer.favorParameter(false).ignoreAcceptHeader(false).useRegisteredExtensionsOnly(false).
                 defaultContentType(MediaType.APPLICATION_JSON).mediaType("json", MediaType.APPLICATION_JSON).
                 mediaType("xml", MediaType.APPLICATION_XML).mediaType("x-yaml", MEDIA_TYPE_APPLICATION_YML);
-
     }
 }

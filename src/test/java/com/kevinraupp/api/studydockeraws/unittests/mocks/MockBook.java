@@ -1,6 +1,6 @@
 package com.kevinraupp.api.studydockeraws.unittests.mocks;
 
-import com.kevinraupp.api.studydockeraws.data.model.Book;
+import com.kevinraupp.api.studydockeraws.model.Book;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.BookVO;
 
 import java.util.ArrayList;

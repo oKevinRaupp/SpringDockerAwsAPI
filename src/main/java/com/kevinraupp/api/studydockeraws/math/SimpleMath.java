@@ -1,7 +1,5 @@
 package com.kevinraupp.api.studydockeraws.math;
 
-import com.kevinraupp.api.studydockeraws.converters.NumberConverter;
-
 public class SimpleMath {
     public Double sum(Double num1, Double num2) {
         return num1 + num2;

@@ -1,12 +1,12 @@
 package com.kevinraupp.api.studydockeraws.services;
 
 import com.kevinraupp.api.studydockeraws.controller.PersonController;
-import com.kevinraupp.api.studydockeraws.data.model.Book;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.BookVO;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.exceptions.ResourceNotFoundException;
 import com.kevinraupp.api.studydockeraws.mapper.DozerMapper;
 import com.kevinraupp.api.studydockeraws.mapper.custom.BookMapper;
+import com.kevinraupp.api.studydockeraws.model.Book;
 import com.kevinraupp.api.studydockeraws.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.kevinraupp.api.studydockeraws.mapper.custom;
 
-import com.kevinraupp.api.studydockeraws.data.model.Person;
 import com.kevinraupp.api.studydockeraws.data.vo.v2.PersonVOV2;
+import com.kevinraupp.api.studydockeraws.model.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

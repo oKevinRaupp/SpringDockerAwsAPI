@@ -1,10 +1,8 @@
 package com.kevinraupp.api.studydockeraws.mapper.custom;
 
-import com.kevinraupp.api.studydockeraws.data.model.Book;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.BookVO;
+import com.kevinraupp.api.studydockeraws.model.Book;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class BookMapper {

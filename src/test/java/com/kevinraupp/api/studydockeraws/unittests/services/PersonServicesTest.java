@@ -1,6 +1,6 @@
 package com.kevinraupp.api.studydockeraws.unittests.services;
 
-import com.kevinraupp.api.studydockeraws.data.model.Person;
+import com.kevinraupp.api.studydockeraws.model.Person;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.PersonVO;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;

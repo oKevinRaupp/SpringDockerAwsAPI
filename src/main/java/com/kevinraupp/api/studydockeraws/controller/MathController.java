@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/math/v1")
-@Tag(name = "Math",description = "Endpoint for simple math exercises.")
+@Tag(name = "Math", description = "Endpoint for simple math exercises.")
 public class MathController {
     private SimpleMath math = new SimpleMath();
 

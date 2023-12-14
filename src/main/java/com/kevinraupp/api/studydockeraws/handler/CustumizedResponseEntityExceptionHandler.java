@@ -1,9 +1,6 @@
 package com.kevinraupp.api.studydockeraws.handler;
 
-import com.kevinraupp.api.studydockeraws.exceptions.ExceptionResponse;
-import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
-import com.kevinraupp.api.studydockeraws.exceptions.ResourceNotFoundException;
-import com.kevinraupp.api.studydockeraws.exceptions.UnsuportedMathOperationException;
+import com.kevinraupp.api.studydockeraws.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -40,6 +37,12 @@ public class CustumizedResponseEntityExceptionHandler extends ResponseEntityExce
     public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationExceptionExceptions(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 
 }
