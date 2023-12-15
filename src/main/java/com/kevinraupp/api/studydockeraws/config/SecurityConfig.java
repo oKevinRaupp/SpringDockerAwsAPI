@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
@@ -41,7 +40,7 @@ public class SecurityConfig {
 
         passwordEncoder.setDefaultPasswordEncoderForMatches(pbkdf2Encoder);
 
-        return new BCryptPasswordEncoder();
+        return passwordEncoder;
     }
 
     @Bean
@@ -52,15 +51,15 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         JwtTokenFilter customFilter = new JwtTokenFilter(tokenProvider);
-        return http
-                .httpBasic(AbstractHttpConfigurer::disable).addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf(AbstractHttpConfigurer::disable).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        return http.httpBasic(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable).addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests.requestMatchers(
                                 "/auth/signin",
                                 "/auth/refresh/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**")
-                        .permitAll().requestMatchers("/api/**").authenticated().requestMatchers("/users").denyAll()).cors(cors -> {
+                                "/v3/api-docs/**").permitAll().requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/users").denyAll()
+                ).cors(cors -> {
                 }).build();
     }
 }

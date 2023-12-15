@@ -44,11 +44,11 @@ public class Permission implements GrantedAuthority, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Permission that)) return false;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id) && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, description);
     }
 }

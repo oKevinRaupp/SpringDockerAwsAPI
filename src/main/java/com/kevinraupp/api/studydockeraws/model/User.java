@@ -40,7 +40,7 @@ public class User implements UserDetails, Serializable {
     private Boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_permission", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {@JoinColumn(name = "id_permission") })
+    @JoinTable(name = "user_permission", joinColumns = {@JoinColumn(name = "id_user")}, inverseJoinColumns = {@JoinColumn(name = "id_permission")})
     private List<Permission> permissions;
 
     public User() {
@@ -86,7 +86,7 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isEnabled() {
-        return this.isEnabled();
+        return this.enabled;
     }
 
     public Long getId() {
@@ -161,11 +161,11 @@ public class User implements UserDetails, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id);
+        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(fullName, user.fullName) && Objects.equals(password, user.password) && Objects.equals(accountNonExpired, user.accountNonExpired) && Objects.equals(accountNonLocked, user.accountNonLocked) && Objects.equals(credentialsNonExpired, user.credentialsNonExpired) && Objects.equals(enabled, user.enabled) && Objects.equals(permissions, user.permissions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, userName, fullName, password, accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, permissions);
     }
 }
