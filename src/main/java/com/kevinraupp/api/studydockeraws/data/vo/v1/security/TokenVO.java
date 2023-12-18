@@ -1,9 +1,12 @@
 package com.kevinraupp.api.studydockeraws.data.vo.v1.security;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@XmlRootElement(name = "TokenVO")
 public class TokenVO implements Serializable {
 
     private String username;

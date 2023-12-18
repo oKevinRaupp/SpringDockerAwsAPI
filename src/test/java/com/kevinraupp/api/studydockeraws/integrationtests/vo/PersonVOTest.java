@@ -7,7 +7,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.io.Serializable;
 import java.util.Objects;
 
-@XmlRootElement
+@XmlRootElement(name = "TokenVO")
 public class PersonVOTest extends RepresentationModel<PersonVOTest> implements Serializable {
 
     private Long id;

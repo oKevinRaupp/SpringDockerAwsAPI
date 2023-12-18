@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-@XmlRootElement
+@XmlRootElement(name = "TokenVO")
 public class TokenVOTest implements Serializable {
 
     private String username;

@@ -4,12 +4,14 @@ package com.kevinraupp.api.studydockeraws.data.vo.v1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.github.dozermapper.core.Mapping;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @JsonPropertyOrder({"id", "firstName", "lastName", "address", "address", "gender"})
+@XmlRootElement(name = "TokenVO")
 public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
     @Mapping("id")
     @JsonProperty("id")
