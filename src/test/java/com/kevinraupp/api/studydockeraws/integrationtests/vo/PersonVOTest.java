@@ -1,12 +1,13 @@
 package com.kevinraupp.api.studydockeraws.integrationtests.vo;
 
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@XmlRootElement
 public class PersonVOTest extends RepresentationModel<PersonVOTest> implements Serializable {
 
     private Long id;
