@@ -9,6 +9,7 @@ import com.kevinraupp.api.studydockeraws.mapper.DozerMapper;
 import com.kevinraupp.api.studydockeraws.mapper.custom.PersonMapper;
 import com.kevinraupp.api.studydockeraws.model.Person;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,6 +85,27 @@ public class PersonServices {
         vo.add(linkTo(methodOn(PersonController.class).findByID(vo.getKey())).withSelfRel());
         return vo;
     }
+
+    @Transactional
+    public PersonVO disablePerson(Long id) {
+        logger.info("Disabling one person!");
+        repository.disablePerson(id);
+        var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify! "));
+        var vo = DozerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findByID(id)).withSelfRel());
+        return vo;
+    }
+
+    @Transactional
+    public PersonVO enablePerson(Long id) {
+        logger.info("Enabling one person!");
+        repository.enablePerson(id);
+        var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify! "));
+        var vo = DozerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findByID(id)).withSelfRel());
+        return vo;
+    }
+
 
     public void delete(Long id) {
         logger.info("Deleting one person!");
