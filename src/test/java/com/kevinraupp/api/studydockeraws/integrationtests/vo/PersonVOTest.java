@@ -20,6 +20,8 @@ public class PersonVOTest extends RepresentationModel<PersonVOTest> implements S
 
     private String gender;
 
+    private Boolean enabled;
+
     public PersonVOTest() {
     }
 
@@ -68,6 +70,14 @@ public class PersonVOTest extends RepresentationModel<PersonVOTest> implements S
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

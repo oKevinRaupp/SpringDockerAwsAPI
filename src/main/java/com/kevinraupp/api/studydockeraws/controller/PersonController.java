@@ -84,6 +84,30 @@ public class PersonController {
         return services.update(person);
     }
 
+    @PatchMapping(value = "/disable/{id}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    @Operation(summary = "Disable a Person", description = "Disable a Person by passing an {id}", tags = {"People"},
+            responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = PersonVO.class))),
+                    @ApiResponse(description = "No content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)})
+    public PersonVO disablePerson(@PathVariable(value = "id") Long id) {
+        return services.disablePerson(id);
+    }
+
+    @PatchMapping(value = "/enable/{id}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
+    @Operation(summary = "Enable a Person", description = "Enable a Person by passing an {id}", tags = {"People"},
+            responses = {@ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = PersonVO.class))),
+                    @ApiResponse(description = "No content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)})
+    public PersonVO enablePerson(@PathVariable(value = "id") Long id) {
+        return services.enablePerson(id);
+    }
+
     @DeleteMapping(value = "/{id}")
     @Operation(summary = "Deletes a person", description = "Deletes a person by passing an Id", tags = {"People"},
             responses = {@ApiResponse(description = "No content", responseCode = "204", content = @Content(schema = @Schema(implementation = PersonVO.class))),
@@ -95,6 +119,5 @@ public class PersonController {
         services.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }
