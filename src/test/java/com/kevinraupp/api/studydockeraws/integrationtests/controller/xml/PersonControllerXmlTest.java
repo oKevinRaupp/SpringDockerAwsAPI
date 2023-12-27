@@ -97,7 +97,7 @@ public class PersonControllerXmlTest extends AbstractIntegrationTest {
         mockPerson();
 
         var content = given().spec(specification).contentType(TestConfigs.CONTENT_TYPE_XML)
-                .accept(TestConfigs.CONTENT_TYPE_XML).header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_KEVIN)
+                .accept(TestConfigs.CONTENT_TYPE_XML).header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.LOCAL_HOST)
                 .pathParams("id", person.getId())
                 .when().get("{id}").then().statusCode(200).extract().body().asString();
 
@@ -208,5 +208,6 @@ public class PersonControllerXmlTest extends AbstractIntegrationTest {
         person.setLastName("Raupp");
         person.setAddress("Gravatai");
         person.setGender("M");
+        person.setEnabled(false);
     }
 }

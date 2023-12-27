@@ -11,4 +11,5 @@ public class TestConfigs {
     public static final String CONTENT_TYPE_YML = "application/x-yaml";
     public static final String ORIGIN_KEVIN = "https://kevinraupp.com";
     public static final String ORIGIN_KEVIN2 = "https://kevinraupp.com/links";
+    public static final String LOCAL_HOST = "http://localhost:8080";
 }
