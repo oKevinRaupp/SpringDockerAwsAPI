@@ -11,8 +11,11 @@ import com.kevinraupp.api.studydockeraws.model.Person;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
@@ -22,11 +25,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonServices {
+    private Logger logger = Logger.getLogger(PersonServices.class.getName());
     @Autowired
     PersonRepository repository;
     @Autowired
     PersonMapper mapper;
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
+
+    @Autowired
+    PagedResourcesAssembler<PersonVO> assembler;
 
     public PersonVO findById(Long id) {
         logger.info("Finding one person!");
@@ -36,7 +42,7 @@ public class PersonServices {
         return vo;
     }
 
-    public Page<PersonVO> findAll(Pageable pageable) {
+    public PagedModel<EntityModel<PersonVO>> findAll(Pageable pageable) {
         logger.info("Finding all person!" + pageable.toString());
 
         var personPage = repository.findAll(pageable);
@@ -44,7 +50,10 @@ public class PersonServices {
         var personVoPage = personPage.map(p -> DozerMapper.parseObject(repository.save(p), PersonVO.class));
 
         personVoPage.map(p -> p.add(linkTo(methodOn(PersonController.class).findByID(p.getKey())).withSelfRel()));
-        return personVoPage;
+
+        Link link = linkTo(methodOn(PersonController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+
+        return assembler.toModel(personVoPage, link);
     }
 
     public PersonVO create(PersonVO person) {
