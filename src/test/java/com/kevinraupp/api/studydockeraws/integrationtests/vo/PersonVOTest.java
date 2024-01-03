@@ -32,6 +32,15 @@ public class PersonVOTest extends RepresentationModel<PersonVOTest> implements S
         this.gender = gender;
     }
 
+    public PersonVOTest(Long id, String firstName, String lastName, String address, String gender, Boolean enabled) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.gender = gender;
+        this.enabled = enabled;
+    }
+
     public Long getId() {
         return id;
     }
