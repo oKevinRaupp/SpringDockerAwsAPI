@@ -159,7 +159,7 @@ public class PersonControllerJsonTest extends AbstractIntegrationTest {
     @Order(4)
     public void testDisablePersonById() throws JsonProcessingException {
 
-        var content = given().spec(specification).basePath("/api/person/v1/enable").contentType(TestConfigs.CONTENT_TYPE_JSON).header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.LOCAL_HOST)
+        var content = given().spec(specification).basePath("/api/person/v1/disable").contentType(TestConfigs.CONTENT_TYPE_JSON).header(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.LOCAL_HOST)
                 .pathParams("id", person.getId()).when().patch("{id}")
                 .then().statusCode(200).extract().body().asString();
 

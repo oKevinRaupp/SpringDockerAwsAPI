@@ -11,9 +11,10 @@ import com.kevinraupp.api.studydockeraws.model.Person;
 import com.kevinraupp.api.studydockeraws.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -35,11 +36,15 @@ public class PersonServices {
         return vo;
     }
 
-    public List<PersonVO> findAll() {
-        logger.info("Finding all person!");
-        var persons = DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
-        persons.stream().forEach(p -> p.add(linkTo(methodOn(PersonController.class).findByID(p.getKey())).withSelfRel()));
-        return persons;
+    public Page<PersonVO> findAll(Pageable pageable) {
+        logger.info("Finding all person!" + pageable.toString());
+
+        var personPage = repository.findAll(pageable);
+
+        var personVoPage = personPage.map(p -> DozerMapper.parseObject(repository.save(p), PersonVO.class));
+
+        personVoPage.map(p -> p.add(linkTo(methodOn(PersonController.class).findByID(p.getKey())).withSelfRel()));
+        return personVoPage;
     }
 
     public PersonVO create(PersonVO person) {
