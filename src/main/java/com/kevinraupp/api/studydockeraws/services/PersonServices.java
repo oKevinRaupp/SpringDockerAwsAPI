@@ -30,7 +30,6 @@ public class PersonServices {
     PersonRepository repository;
     @Autowired
     PersonMapper mapper;
-
     @Autowired
     PagedResourcesAssembler<PersonVO> assembler;
 

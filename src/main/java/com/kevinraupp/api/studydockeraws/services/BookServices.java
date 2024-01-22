@@ -1,6 +1,6 @@
 package com.kevinraupp.api.studydockeraws.services;
 
-import com.kevinraupp.api.studydockeraws.controller.PersonController;
+import com.kevinraupp.api.studydockeraws.controller.BookController;
 import com.kevinraupp.api.studydockeraws.data.vo.v1.BookVO;
 import com.kevinraupp.api.studydockeraws.exceptions.RequiredObjectIsNullException;
 import com.kevinraupp.api.studydockeraws.exceptions.ResourceNotFoundException;
@@ -9,9 +9,13 @@ import com.kevinraupp.api.studydockeraws.mapper.custom.BookMapper;
 import com.kevinraupp.api.studydockeraws.model.Book;
 import com.kevinraupp.api.studydockeraws.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -19,25 +23,34 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class BookServices {
+    private Logger logger = Logger.getLogger(BookServices.class.getName());
     @Autowired
     BookRepository repository;
     @Autowired
     BookMapper mapper;
-    private Logger logger = Logger.getLogger(BookServices.class.getName());
+    @Autowired
+    PagedResourcesAssembler<BookVO> assembler;
 
     public BookVO findById(Long id) {
         logger.info("Finding one book!");
         var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found! Verify! "));
         var vo = DozerMapper.parseObject(entity, BookVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findByID(id)).withSelfRel());
+        vo.add(linkTo(methodOn(BookController.class).findByID(id)).withSelfRel());
         return vo;
     }
 
-    public List<BookVO> findAll() {
-        logger.info("Finding all books!");
-        var books = DozerMapper.parseListObjects(repository.findAll(), BookVO.class);
-        books.stream().forEach(b -> b.add(linkTo(methodOn(PersonController.class).findByID(b.getKey())).withSelfRel()));
-        return books;
+    public PagedModel<EntityModel<BookVO>> findAll(Pageable pageable) {
+        logger.info("Finding all books!" + pageable.toString());
+
+        var bookPage = repository.findAll(pageable);
+
+        var bookVoPage = bookPage.map(p -> DozerMapper.parseObject(repository.save(p), BookVO.class));
+
+        bookVoPage.map(p -> p.add(linkTo(methodOn(BookController.class).findByID(p.getKey())).withSelfRel()));
+
+        Link link = linkTo(methodOn(BookController.class).findAll(pageable.getPageNumber(), pageable.getPageSize(), "asc")).withSelfRel();
+
+        return assembler.toModel(bookVoPage, link);
     }
 
     public BookVO create(BookVO bookVO) {
@@ -49,7 +62,7 @@ public class BookServices {
 
         var entity = DozerMapper.parseObject(bookVO, Book.class);
         var vo = DozerMapper.parseObject(repository.save(entity), BookVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findByID(vo.getKey())).withSelfRel());
+        vo.add(linkTo(methodOn(BookController.class).findByID(vo.getKey())).withSelfRel());
         return vo;
     }
 
@@ -67,7 +80,7 @@ public class BookServices {
         entity.setTitle(bookVO.getTitle());
 
         var vo = DozerMapper.parseObject(repository.save(entity), BookVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findByID(vo.getKey())).withSelfRel());
+        vo.add(linkTo(methodOn(BookController.class).findByID(vo.getKey())).withSelfRel());
         return vo;
     }
 
